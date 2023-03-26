@@ -37,16 +37,29 @@ typedef struct instruction_s
         char *opcode;
         void (*f)(stack_t **stack, unsigned int line_number);
 } instruction_t;
-/***/
+
+
+/**
+* struct arg_S - variables -args, file, line content
+* @arg: value
+* @file: pointer to monty file
+* @content: line content
+* @lifi: flag change stack <-> queue
+*
+* Description: carries values through the program
+*/
 typedef struct arg_s {
     char *arg;
     FILE *file;
     char *content;
+    int lifi;
 } arg_t;
 extern arg_t args;
+
 void f_push(stack_t **head, unsigned int line_number);
 void f_pall(stack_t **head, unsigned int line_number);
 void add_node(stack_t **head, int n);
 int opcode_execution(char *content, stack_t **stack, FILE *file, unsigned int line_number);
 int _getline(char **line, size_t *n, FILE *stream);
+void free_stack(stack_t *head);
 #endif
