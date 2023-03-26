@@ -1,8 +1,9 @@
 #include "monty.h"
+#include <stdio.h>
 
 /***/
 
-arg_t args = { NULL, NULL, NULL};
+arg_t args = { NULL, NULL, NULL, 0};
 int main(int argc, char *argv[])
 {
     FILE *file;
@@ -35,7 +36,7 @@ int main(int argc, char *argv[])
         free(content);
         
     }
-    /** free stack */
+    free_stack(stack);
     fclose(file);
     return (0);
 }

@@ -1,4 +1,5 @@
 #include "monty.h"
+#include <stdlib.h>
 /**
  * @file opcode_execution.c
  * @author your name (you@domain.com)
@@ -13,7 +14,7 @@ int opcode_execution(char *content, stack_t **stack, __attribute__((unused))FILE
 {
     instruction_t opst[] = {
         {"push", f_push},
-        /* {"pall", f_pall}, */
+        {"pall", f_pall}, 
         {NULL, NULL}
     };
     char *op;
@@ -28,6 +29,13 @@ int opcode_execution(char *content, stack_t **stack, __attribute__((unused))FILE
             opst[i].f(stack, line_number);
         }
         i++;
+    }
+    if (op && opst[i].opcode == NULL){
+        fprintf(stderr, "L%d: unknown instruction %s\n", line_number, op);
+        fclose(file);
+        free(content);
+        free_stack(*stack);
+        exit(EXIT_FAILURE);
     }
     return (1);
 }
